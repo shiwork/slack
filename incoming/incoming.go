@@ -6,36 +6,41 @@ import (
 	"net/url"
 )
 
-type IncomingConf struct {
-	WebHookUrl string
+// Config struct
+type Config struct {
+	WebHookURL string
 }
 
 // https://api.slack.com/docs/attachments
 
+// Field struct
 type Field struct {
 	Title string `json:"title"`
 	Value string `json:"value"`
-	Short bool `json:"short"`
+	Short bool   `json:"short"`
 }
 
+// Attachment struct
 type Attachment struct {
-	Fallback string `json:"fallback"`
-	Pretext  string `json:"pretext"`
-	Color    string `json:"color"`
-	Fields   []*Field `json:"fields"`
+	Fallback string  `json:"fallback"`
+	Pretext  string  `json:"pretext"`
+	Color    string  `json:"color"`
+	Fields   []Field `json:"fields"`
 }
 
-type Payload struct{
-	Attachments []*Attachment `json:"attachments"`
+// Payload struct
+type Payload struct {
+	Attachments []Attachment `json:"attachments"`
 }
 
-func Post(conf IncomingConf, payload Payload) error {
+// Post method
+func Post(conf Config, payload Payload) error {
 	p, err := json.Marshal(&payload)
 	if err != nil {
 		return err
 	}
 
-	_, err = http.PostForm(conf.WebHookUrl, url.Values{
+	_, err = http.PostForm(conf.WebHookURL, url.Values{
 		"payload": []string{string(p)},
 	})
 
