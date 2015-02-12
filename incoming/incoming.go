@@ -15,17 +15,17 @@ type Config struct {
 
 // Field struct
 type Field struct {
-    Title string `json:"title"`
-    Value string `json:"value"`
-    Short bool   `json:"short"`
+    Title string `json:"title,omitempty"`
+    Value string `json:"value,omitempty"`
+    Short bool   `json:"short,omitempty"`
 }
 
 // Attachment struct
 type Attachment struct {
-    Fallback string  `json:"fallback"`
-    Pretext  string  `json:"pretext"`
-    Color    string  `json:"color"`
-    Fields   []Field `json:"fields"`
+    Fallback string  `json:"fallback,omitempty"`
+    Pretext  string  `json:"pretext,omitempty"`
+    Color    string  `json:"color,omitempty"`
+    Fields   []Field `json:"fields,omitempty"`
 }
 
 // Payload struct
